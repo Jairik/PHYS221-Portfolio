@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>A Semester in Motion · PHYS 221 Portfolio · Jairik McCauley</title>
+<meta name="description" content="A Semester in Motion — PHYS 221 Classical Mechanics portfolio by Jairik 'JJ' McCauley." />
+<link rel="stylesheet" href="styles.css" />
+<script>
+  // Lock the body before paint so content never flashes.
+  try {
+    if (sessionStorage.getItem('sim-unlocked') !== '1') {
+      document.documentElement.classList.add('pre-locked');
+    }
+  } catch (_) {
+    document.documentElement.classList.add('pre-locked');
+  }
+</script>
+<style>
+  html.pre-locked body { visibility: hidden; }
+  html.pre-locked body.locked { visibility: visible; }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate" aria-hidden="true">
+  <div class="gate-card">
+    <p class="gate-eyebrow">PHYS 221 · 2026</p>
+    <h1 class="gate-title">A Semester<br/>in <em>Motion.</em></h1>
+    <p class="gate-sub">Protected. Enter the password to continue.</p>
+    <form class="gate-form" id="gate-form" autocomplete="off">
+      <input
+        type="password"
+        class="gate-input"
+        id="gate-input"
+        placeholder="password"
+        aria-label="Password"
+        autofocus
+      />
+      <button type="submit" class="gate-btn">Enter</button>
+      <div class="gate-error" id="gate-error" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const PASSWORD = 'password';
+    let unlocked = false;
+    try { unlocked = sessionStorage.getItem('sim-unlocked') === '1'; } catch (_) {}
+
+    if (!unlocked) {
+      document.body.classList.add('locked');
+    }
+    document.documentElement.classList.remove('pre-locked');
+
+    const form = document.getElementById('gate-form');
+    const input = document.getElementById('gate-input');
+    const err = document.getElementById('gate-error');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value === PASSWORD) {
+        try { sessionStorage.setItem('sim-unlocked', '1'); } catch (_) {}
+        document.body.classList.remove('locked');
+        err.textContent = '';
+      } else {
+        err.textContent = 'Incorrect password.';
+        input.select();
+      }
+    });
+  })();
+</script>
+
+<div class="grid-bg"></div>
+<div class="starfield"></div>
+
+<nav class="toc" id="toc">
+  <a data-target="hero">00 · Cover</a>
+  <a data-target="cover-letter">01 · Letter</a>
+  <a data-target="works">02 · Works</a>
+  <a data-target="colophon">03 · End</a>
+</nav>
+
+<main>
+
+  <section class="hero" id="hero" data-screen-label="Cover">
+    <div class="wrap">
+      <div class="hero-meta">
+        <div class="brand"><strong>PHYS 221</strong> · A Semester in Motion · 2026</div>
+        <nav>
+          <a data-target="cover-letter">Letter</a>
+          <a data-target="works">Works</a>
+        </nav>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="word">A</span> <span class="word">Semester</span><br/>
+        <span class="word">in</span> <span class="word motion">Motion.</span>
+      </h1>
+
+      <div class="hero-row">
+        <p class="hero-tag">
+          Six selected problems &amp; activities tracing a path from <em>frictionless theory</em>
+          through collisions, rotation, and the moment when the math finally
+          starts <span class="mono-inline">f(t) &rarr; meaning.</span>
+        </p>
+        <dl class="hero-credits">
+          <dt>Course</dt><dd>PHYS 221 · Classical Mechanics</dd>
+          <dt>Author</dt><dd>Jairik "JJ" McCauley</dd>
+          <dt>Professor</dt><dd>Dr. Joe</dd>
+          <dt>Format</dt><dd>Six works · annotated</dd>
+        </dl>
+      </div>
+
+      <div class="hero-scroll">
+        <span>Scroll · or pick a section</span>
+        <span class="vector">read in order <span class="arrow"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cover-letter" data-screen-label="Letter">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">§ 01 &nbsp;·&nbsp; <span>letter</span></div>
+        <h2 class="title">Math is <em>cool</em><br/>(??)</h2>
+      </div>
+
+      <div class="cover-letter">
+        <aside>
+          <div class="stat"><span class="v">100 &rarr; <em>0</em></span><span class="k">mph, give or take</span></div>
+          <div class="stat"><span class="v">44.704</span><span class="k">m/s · same thing</span></div>
+          <div class="stat"><span class="v"><em>î</em>, <em>ĵ</em></span><span class="k">developer brain ✓</span></div>
+          <div class="stat"><span class="v">∞</span><span class="k">stories numbers tell</span></div>
+        </aside>
+
+        <div class="body">
+          <p>Coming from a computer science and data science background, I have had immense exposure to seeing how numbers shape our decision making, serve as a tool for explaining things, and how numbers essentially power everything that we do. Despite knowing the calculus-derived formulas, linear algebra, and computational theory, I had a fundamentally weak understanding of how numbers <em>actually</em> make the world work. This class gave me tremendous insight into this, showcasing how the complexities such as motion and collisions have been studied and broken down into numerical expressions and conceptual interpretations, highlighting hundreds of years of study into how ultimately everything works. I am beyond grateful to have been able to take this class in my last semester of college, providing me an opportunity to finally connect everything I have learned through a low-level physics standpoint.</p>
+
+          <p>What ultimately stood out to me the most from this class was the way that it forced me to slow down and reflect. In computer science, there is always something to run, test, debug, or iterate on. Many of the more difficult problems in this course showcase this transition from 100 miles an hour (or 44.704 m/s) to decelerating slowly to near-rest, having to really think about the system and breaking down each component. Many of the problems selected for this portfolio reflect this shift, representing the times that I stopped looking at the math as simply a means to solve a problem, but instead a modality to <em>describe and express what is actually happening</em> in a scenario. If there is anything that I have learned through my education here, especially in data science classes, it is that math and numbers are beautiful in the sense that they can universally tell any sort of story. And what is a more beautiful application of this than the world around us?</p>
+
+          <p class="signature">— jjm · last semester, last class</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" data-screen-label="Works Intro">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">§ 02 &nbsp;·&nbsp; <span>works</span></div>
+        <h2 class="title">Six problems<br/>that <em>clicked</em>.</h2>
+      </div>
+      <p class="lede works-lede">My growth wasn't tied to exam scores. It was learning to <em>reason physically</em> — to feel how a system's parts push and pull on each other. What follows is the work, with the page on the left and the reflection on the right.</p>
+    </div>
+  </section>
+
+  <div id="works-root"></div>
+
+  <section id="colophon" data-screen-label="End">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">§ 03 &nbsp;·&nbsp; <span>end</span></div>
+        <h2 class="title">For the<br/>numbers people.</h2>
+      </div>
+      <p class="lede" style="max-width: 50ch; margin: 0 auto; text-align: center;">If you've made it this far — thank you for taking the long way around the loop-the-loop with me. <em>full-circle (haha)</em>.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <h4>Course</h4>
+      <p>PHYS 221 · Classical Mechanics<br/>Fall 2026 · with Dr. Joe</p>
+    </div>
+    <div class="col">
+      <h4>Author</h4>
+      <p>Jairik "JJ" McCauley<br/>B.S. Computer Science · Data Science</p>
+    </div>
+    <div class="col">
+      <h4>Contents</h4>
+      <p>6 selected works · annotated<br/>Cover letter · Reflections</p>
+    </div>
+  </div>
+  <p class="signoff">— a semester in motion —</p>
+</footer>
+
+<script src="works.js" defer></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-target]').forEach(a => {
+      a.addEventListener('click', () => {
+        const el = document.getElementById(a.dataset.target);
+        if (el) window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
+      });
+    });
+
+    const sections = ['hero','cover-letter','works','colophon'];
+    const tocLinks = document.querySelectorAll('#toc a');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          tocLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    sections.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+  });
+</script>
+</body>
+</html>
