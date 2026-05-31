@@ -1,5 +1,7 @@
 # PHYS221-Portfolio
 
+> password = "password"
+
 **A Semester in Motion** — an interactive static site for my PHYS 221 (Classical Mechanics) portfolio. Mostly an excuse to play around with Claude Design.
 
 A cover letter, plus six selected problems & activities. Each work is a 3D-tiltable card paired with a written reflection; multi-page works flip through a carousel.
